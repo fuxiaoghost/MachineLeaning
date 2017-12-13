@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-  
 from numpy import *
 import operator
+import matplotlib
+import matplotlib.pyplot as plt
+import matFont
+
 def createDataSet():
 	group = array([[1.0, 1.1], [1.0, 1.0], [0, 0], [0, 0.1]])
 	labels = ['A', 'A', 'B', 'B']
@@ -39,4 +43,12 @@ def file2matrix(filename):
 			index += 1
 		return returnMat, classLabelVector
 
-print file2matrix('datingTestSet2.txt')
+matFont.set_matplot_zh_font()
+datingDataMat,datingLabels = file2matrix('datingTestSet2.txt')
+fig = plt.figure('datingDataMat')
+ax = fig.add_subplot(111)
+ax.set_title(u'散点图')
+ax.set_xlabel(u'玩视频游戏所耗时间百分比')
+ax.set_ylabel(u'每周消费的冰激凌公升数')
+ax.scatter(datingDataMat[:,1], datingDataMat[:,2], 20.0 * array(datingLabels), 15.0 * array(datingLabels))
+plt.show()
